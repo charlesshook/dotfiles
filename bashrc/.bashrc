@@ -11,4 +11,27 @@ function get_system_info() {
     printf "\n"
 }
 
+# Colors
+green='\[\e[0;32m\]'
+reset='\[\e[0m\]'
+
 alias sysinfo=get_system_info
+
+source ~/.git-prompt.sh
+export PATH="$PATH:/opt/nvim-linux64/bin"
+
+# History setup
+HISTCONTROL=ignoreboth
+shopt -s histappend
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# Update window size
+shopt -s checkwinsize
+
+# Source aliases if they exist
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+PS1="$green"'→ '"$reset"'\u@\h \W$(__git_ps1 " (%s)"): ' 
