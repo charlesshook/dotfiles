@@ -15,9 +15,14 @@ function get_system_info() {
 green='\[\e[0;32m\]'
 reset='\[\e[0m\]'
 
-alias sysinfo=get_system_info
+if [ -e $HOME/.git-prompt.sh ]; then
+    source $HOME/.git-prompt.sh
+fi
 
-source ~/.git-prompt.sh
+if [ -e $HOME/.bash_aliases ]; then
+    source $HOME/.bash_aliases
+fi
+
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
 # History setup
@@ -29,9 +34,19 @@ HISTFILESIZE=2000
 # Update window size
 shopt -s checkwinsize
 
-# Source aliases if they exist
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+PS1="$green"'→ '"$reset"'\u@\h \W$(__git_ps1 " (%s)"): '
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
 fi
 
-PS1="$green"'→ '"$reset"'\u@\h \W$(__git_ps1 " (%s)"): ' 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
