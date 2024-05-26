@@ -23,8 +23,6 @@ if [ -e $HOME/.bash_aliases ]; then
     source $HOME/.bash_aliases
 fi
 
-export PATH="$PATH:/opt/nvim-linux64/bin"
-
 # History setup
 HISTCONTROL=ignoreboth
 shopt -s histappend
@@ -46,6 +44,10 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+export PATH="$PATH:/opt/nvim-linux64/bin"
+
+export PATH="$PATH:/usr/local/go/bin"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
